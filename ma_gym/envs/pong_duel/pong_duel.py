@@ -25,7 +25,7 @@ class PongDuel(gym.Env):
         self._max_rounds = max_rounds
         self.action_space = MultiAgentActionSpace([spaces.Discrete(3) for _ in range(self.n_agents)])
 
-        self._step_count = None
+        self.step_count = None
         self._step_cost = step_cost
         self._total_episode_reward = None
         self.agent_pos = {_: None for _ in range(self.n_agents)}
@@ -112,7 +112,7 @@ class PongDuel(gym.Env):
         self.__init_ball_pos()
         self._agent_dones = [False, False]
         self.__init_full_obs()
-        self._step_count = 0
+        self.step_count = 0
         self._total_episode_reward = [0 for _ in range(self.n_agents)]
 
         return self.get_agent_obs()
@@ -226,7 +226,7 @@ class PongDuel(gym.Env):
 
     def step(self, action_n):
         assert len(action_n) == self.n_agents
-        self._step_count += 1
+        self.step_count += 1
         rewards = [self._step_cost for _ in range(self.n_agents)]
 
         # if ball is beyond paddle, initiate a new round
@@ -241,7 +241,7 @@ class PongDuel(gym.Env):
             self._agent_dones = [True for _ in range(self.n_agents)]
             rewards = [0 for _ in range(self.n_agents)]
         else:
-            if self._step_count >= 5000: ## early stop 0504 revised
+            if self.step_count >= 5000: ## early stop 0504 revised
                 print("Tie")
                 self._agent_dones = [True for _ in range(self.n_agents)]
 
