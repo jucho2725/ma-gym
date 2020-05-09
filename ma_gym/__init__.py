@@ -54,7 +54,7 @@ register(
 register(
     id='PongDuel-v0',
     entry_point='ma_gym.envs.pong_duel:PongDuel',
-    kwargs={'step_cost': 1, 'reward': 0, 'max_rounds': 10}
+    kwargs={'step_cost': 0, 'reward': 0, 'max_rounds': 10}
 )
 
 for game_info in [[(5, 5), 2, 1], [(7, 7), 4, 2]]:  # [(grid_shape, predator_n, prey_n),..]
